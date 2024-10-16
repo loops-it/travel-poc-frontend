@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "./App.css"
+import './App.css';
 
 const App = () => {
   const [inputText, setInputText] = useState('');
@@ -16,7 +16,7 @@ const App = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text: inputText }), 
+        body: JSON.stringify({ text: inputText }),
       });
 
       if (!response.ok) {
@@ -31,25 +31,48 @@ const App = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Extract Customer Details</h1>
-      <textarea
-        rows="10"
-        cols="50"
-        value={inputText}
-        onChange={handleInputChange}
-        placeholder="Paste text here"
-      />
-      <br />
-      <button onClick={getDetails}>Get Details</button>
+      <div className="container">
+        <h1>Extract Customer Details</h1>
+        <textarea
+            rows="10"
+            cols="50"
+            value={inputText}
+            onChange={handleInputChange}
+            placeholder="Paste text here"
+            className="input-textarea"
+        />
+        <br />
+        <button onClick={getDetails} className="get-details-button">
+          Get Details
+        </button>
 
-      {details && (
-        <div style={{ marginTop: '20px' }}>
-          <h3>Extracted Details:</h3>
-          <p>{details}</p>
-        </div>
-      )}
-    </div>
+        {details && (
+            <div className="details-container">
+              <h3>Extracted Details:</h3>
+              <div className="detail-item">
+                <strong>Name:</strong> {details.customerName || 'Not provided'}
+              </div>
+              <div className="detail-item">
+                <strong>Phone Number:</strong> {details.pNumber || 'Not provided'}
+              </div>
+              <div className="detail-item">
+                <strong>Email:</strong> {details.email || 'Not provided'}
+              </div>
+              <div className="detail-item">
+                <strong>Expected Destination:</strong> {details.hopeToGo || 'Not provided'}
+              </div>
+              <div className="detail-item">
+                <strong>Expected Date:</strong> {details.date || 'Not provided'}
+              </div>
+              <div className="detail-item">
+                <strong>Expected Return Date:</strong> {details.return || 'Not provided'}
+              </div>
+              <div className="detail-item">
+                <strong>Budget:</strong> {details.budget || 'Not provided'}
+              </div>
+            </div>
+        )}
+      </div>
   );
 };
 
