@@ -11,7 +11,7 @@ const App = () => {
 
   const getDetails = async () => {
     try {
-      const response = await fetch('https://travel-poc-backend.vercel.app/extract-details', {
+      const response = await fetch('http://localhost:3001/extract-details', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,6 +72,8 @@ const App = () => {
               </div>
             </div>
         )}
+
+
       </div>
   );
 };
